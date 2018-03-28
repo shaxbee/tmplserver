@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/shaxbee/tmplserver/cmd/tmplserver"
 
 import (
 	"flag"

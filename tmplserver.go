@@ -1,4 +1,4 @@
-package tmplserver
+package tmplserver // import "github.com/shaxbee/tmplserver"
 
 import (
 	"net/http"
