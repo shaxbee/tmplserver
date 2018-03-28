@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>{{.Env.PAGE_TITLE}}</title>
+</head>
+<body>
+    <h1>Pilots</h1>
+    <ul>
+    {{range .Data.pilots}}
+        <li>{{.}}</li>
+    {{end}}
+    </ul>
+</body>
+</html>
