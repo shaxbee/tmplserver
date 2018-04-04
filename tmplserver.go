@@ -1,6 +1,7 @@
 package tmplserver // import "github.com/shaxbee/tmplserver"
 
 import (
+	"io"
 	"net/http"
 	"os"
 	"path"
@@ -37,6 +38,12 @@ func (s *tmplServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	for _, resolver := range s.resolvers {
 		mod, tr, err := resolver.Resolve(r.URL.Path[1:])
+		defer func() {
+			if cl, ok := tr.(io.Closer); ok {
+				cl.Close()
+			}
+		}()
+
 		switch {
 		case os.IsPermission(err):
 			log.Print(err)

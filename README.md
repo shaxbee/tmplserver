@@ -1,10 +1,9 @@
 # Template Server
 
-Server for serving static files and templates.
-
+Server for serving static files and templates.  
 Templates are parsed using text/template.
 
-## Run
+## Example
 
 Expose server on port 80 using example templates and data.
 
@@ -40,12 +39,6 @@ Output:
 go get -u github.com/shaxbee/tmplserver/cmd/tmplserver
 ```
 
-## Example
-
-```sh
-PAGE_TITLE=tmplserver tmplserver -base ../example -env -data ../example/data.yaml
-```
-
 ## Usage
 
 ### Arguments:
@@ -58,9 +51,9 @@ PAGE_TITLE=tmplserver tmplserver -base ../example -env -data ../example/data.yam
 
 ### Template values
 
-Env contains map of environment variables if `-env` is used.  
+`Env` contains map of environment variables if `-env` is used.  
 If value contains comma it is split into slice of strings.
 
-Data contains map loaded from yaml or json file specified by `-data`.
+`Data` contains map loaded from yaml or json file specified by `-data`.
 
 

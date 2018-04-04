@@ -18,6 +18,7 @@ type fileResolver struct {
 
 func (fr fileResolver) Resolve(name string) (time.Time, io.ReadSeeker, error) {
 	f, err := os.Open(path.Join(fr.base, name))
+
 	switch {
 	case os.IsNotExist(err):
 		return time.Time{}, nil, nil
