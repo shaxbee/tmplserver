@@ -1,11 +1,11 @@
-FROM golang:1.10-alpine AS build
-RUN apk add --no-cache git
+FROM golang:1.10 AS build
 WORKDIR /go/src/github.com/shaxbee/tmplserver
 COPY . .
 RUN go get -d ./...
-RUN CGO_ENABLED=0 go install ./...
+RUN go install ./...
 
-FROM scratch
+FROM gcr.io/distroless/base
+EXPOSE 80
 WORKDIR /opt/tmplserver
 COPY --from=build /go/bin/tmplserver .
-CMD ["/opt/tmplserver/tmplserver"]
+ENTRYPOINT ["/opt/tmplserver/tmplserver"]

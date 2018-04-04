@@ -21,7 +21,7 @@ import (
 )
 
 var (
-	addr     = flag.String("addr", "0.0.0.0:8080", "Listen address")
+	addr     = flag.String("addr", "0.0.0.0:80", "Listen address")
 	basePath = flag.String("base", ".", "Files base path")
 	certFile = flag.String("cert", "", "TLS certificate path")
 	keyFile  = flag.String("key", "", "TLS key path")
@@ -62,8 +62,8 @@ func load(base, data string, env bool) (*tmplData, error) {
 	}
 
 	ext := filepath.Ext(data)
-	if ext != "json" && ext != "yaml" {
-		return nil, errors.Errorf("Unsupported file type %s", ext)
+	if ext != ".json" && ext != ".yaml" {
+		return nil, errors.Errorf("Unsupported file type %s", data)
 	}
 
 	b, err := ioutil.ReadFile(path.Join(base, data))
@@ -84,6 +84,10 @@ func tmplResolver(base string, data string, env bool) (tmplserver.Resolver, erro
 	vals, err := load(base, data, env)
 	if err != nil {
 		return nil, err
+	}
+
+	if !filepath.IsAbs(data) {
+		data = path.Join(base, data)
 	}
 
 	files, err := zglob.Glob(path.Join(base, "**/*.tmpl"))

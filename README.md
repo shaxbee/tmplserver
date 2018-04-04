@@ -4,6 +4,36 @@ Server for serving static files and templates.
 
 Templates are parsed using text/template.
 
+## Run
+
+Expose server on port 80 using example templates and data.
+
+```sh
+docker run -p 80:80 -v "${PWD}/example:/data"  -e "PAGE_TITLE=Hello World" shaxbee/tmplserver -base /data -env -data data.yaml 
+```
+
+Check if it works:
+
+```sh
+curl http://localhost
+```
+
+Output:
+
+```html
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Pilots</h1>
+    <ul>
+        <li>Leela Turanga</li>
+        <li>Bender Bending Rodriguez</li>
+    </ul>
+</body>
+```
+
 ## Install
 
 ```sh
